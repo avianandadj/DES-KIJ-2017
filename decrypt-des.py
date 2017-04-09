@@ -1,6 +1,17 @@
-import sys
+# -*- coding: utf-8 -*-
+"""
+Lyle Scott III
+lyle@digitalfoo.net
+http://www.digitalfoo.net
 
-# IV = '0000000000000000000000000000000000000000000000000000000000000000'
+CREDITS
+This program was written by reading 'DES Algorithm Illustrated' over and over
+and over. Thanks for this!
+-- http://orlingrabbe.com/des.htm
+-- by J. Orlin Grabbe
+"""
+import sys
+import binascii
 
 PC1 = [57,  49,  41,  33,  25,  17,   9,
         1,  58,  50,  42,  34,  26,  18,
@@ -205,10 +216,10 @@ def get_hexwords(msg):
     """break the ASCII message into a 64bit (16 hex bytes) words"""
     hexwords = []
 
-    for i in xrange(0, len(msg), 8):
-        msg_block = msg[i:i+8]
-        m = message_to_hex(msg_block)
-        hexwords.append(m)
+    for i in xrange(0, len(msg), 16):
+        msg_block = msg[i:i+16]
+        # m = message_to_hex(msg_block)
+        hexwords.append(msg_block)
 
     last = hexwords[-1]
     hexwords[-1] += ''.join(['0'] * (16-len(last)))
@@ -223,14 +234,13 @@ def encrypt(key, msg):
     """break the message string down into hexwords and encrypt each"""
     encrypted_msg = []
     IV = '0000000000000000000000000000000000000000000000000000000000000000'
-    for hexword in get_hexwords(msg):
-        #print string_chunker('encrypting hexword', hexword, 2)
-        (hasilteks, hasilbiner) = encrypt_hexword(key, hexword, IV)
-        # print 'ini hasil biner di fungsi encrypt: '+hasilbiner
-        # print 'ini hasil text di fungsi encrypt: '+hasilteks
-        IV = hasilbiner
-        encrypted_msg.append(hasilteks)
 
+    for hexword in get_hexwords(msg):
+        # print hexword
+        #print string_chunker('encrypting hexword', hexword, 2)
+        cipherbin, hasil = encrypt_hexword(key, hexword, IV)
+        encrypted_msg.append(hasil)
+        IV = cipherbin
     return ''.join(encrypted_msg)
 
 
@@ -240,9 +250,6 @@ def encrypt_hexword(key, hexword, IV):
     """
     # message
     m = hex_to_64binary(hexword)
-    # print 'ini m di fungsi encrypt_hexword: '+m
-    # print 'ini IV di fungsi encrypt_hexword: '+IV
-    m2 = xor(m, IV)
     # print m
     #print string_chunker('M', m, 4)
 
@@ -251,7 +258,7 @@ def encrypt_hexword(key, hexword, IV):
     #print string_chunker('K', k, 8)
 
     # initial permutation of message
-    ip = permutate(IP, m2, 64)
+    ip = permutate(IP, m, 64)
     #print string_chunker('IP', ip, 8)
 
     middle = len(ip) / 2
@@ -272,6 +279,7 @@ def encrypt_hexword(key, hexword, IV):
     #print '-'*80
 
     # loop 16 'rounds'
+    k = []
     for round_i in xrange(16):
 
         # left shift the bits of c and d
@@ -280,15 +288,16 @@ def encrypt_hexword(key, hexword, IV):
 
         # print string_chunker('d%d' % (round_i+1), d, 7)
         # apply PC2 permutation
-        k = permutate(PC2, c+d, 48)
+        k.append(permutate(PC2, c+d, 48))
         # print string_chunker('k%d' % (round_i+1), k, 6)
-
+    
+    for round_i in reversed(xrange(16)):
         # apply E permutation
         e = permutate(E, r, 48)
         # print string_chunker('E(R%d)' % (round_i), e, 6)
 
         # xor k with e (2 bit addition)
-        x = xor(k, e)
+        x = xor(k[round_i], e)
         # print string_chunker('xor(K%d,E(R%d)' % (round_i+1, round_i), x, 6)
 
         # apply SBOX permutations to blocks of 6 values of the result of the
@@ -330,22 +339,21 @@ def encrypt_hexword(key, hexword, IV):
 
     # apply the IP_INVERSE permutation
     encrypted_msg =  permutate(IP_INVERSE, rl, 64)
-    # print encrypted_msg
     # print string_chunker('enc msg', encrypted_msg, 8)
-
+    encrypted_msg2 = xor(encrypted_msg, IV)
     # convert the final bitstring back into a hex message
-    # print encrypted_msg
-    bin2hex = binary_to_hex(encrypted_msg)
+    # print encrypted_msg)
+    crypto = int('0b'+encrypted_msg2, 2)
+    return m, binascii.unhexlify('%x' % crypto)
+    # bin2hex = binary_to_hex(encrypted_msg)
     # print string_chunker('hex', bin2hex)
-
-    return bin2hex, encrypted_msg
 
 
 def run():
-    if len(sys.argv) == 2:
+    if len(sys.argv) == 3:
         key = sys.argv[1].upper()
-        msg = 'Internet of Thing (IoT) adalah sebuah metode pengimplementasian internet dalam peralatan sehari-hari dengan tujuan mempermudah kehidupan manusia.'
-        # msg = 'COMPUTER'
+        msg = sys.argv[2]
+
         print 'key:', key
         print 'msg:', msg
 
@@ -358,7 +366,6 @@ def run():
 
     enc = encrypt(key, msg)
     print enc
-    # print string_chunker('encrypted:', enc, 16)
 
 
 if __name__ == '__main__':
