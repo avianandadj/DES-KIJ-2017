@@ -44,3 +44,4 @@ Berikut ini merupakan langkah implementasi algoritma Data Encryption Standard (D
 http://dhost.info/pasjagor/des/start.php?id=0
 http://octarapribadi.blogspot.co.id/2012/10/contoh-enkripsi-dengan-algoritma-des.html
 http://page.math.tu-berlin.de/~kant/teaching/hess/krypto-ws2006/des.htm
+afif
