@@ -343,8 +343,9 @@ def encrypt_hexword(key, hexword, IV):
 
 def run():
     if len(sys.argv) == 2:
-        key = sys.argv[1].upper()
-        msg = 'Internet of Thing (IoT) adalah sebuah metode pengimplementasian internet dalam peralatan sehari-hari dengan tujuan mempermudah kehidupan manusia.'
+        # key = sys.argv[1].upper()
+        key = '133457799BBCDFF1'
+        msg = sys.argv[1]
         # msg = 'COMPUTER'
         print 'key:', key
         print 'msg:', msg

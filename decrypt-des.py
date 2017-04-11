@@ -1,15 +1,4 @@
 # -*- coding: utf-8 -*-
-"""
-Lyle Scott III
-lyle@digitalfoo.net
-http://www.digitalfoo.net
-
-CREDITS
-This program was written by reading 'DES Algorithm Illustrated' over and over
-and over. Thanks for this!
--- http://orlingrabbe.com/des.htm
--- by J. Orlin Grabbe
-"""
 import sys
 import binascii
 
@@ -350,9 +339,11 @@ def encrypt_hexword(key, hexword, IV):
 
 
 def run():
-    if len(sys.argv) == 3:
-        key = sys.argv[1].upper()
-        msg = sys.argv[2]
+    if len(sys.argv) == 2:
+        # key = sys.argv[1].upper()
+        # msg = sys.argv[2]
+        key = '133457799BBCDFF1'
+        msg = sys.argv[1]
 
         print 'key:', key
         print 'msg:', msg
