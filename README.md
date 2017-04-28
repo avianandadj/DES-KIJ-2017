@@ -85,7 +85,7 @@ Diffie-hellman
 
     setelah di proses, kedua client akan mendapatkan key yang sama untuk digunakan pada enkripsi DES.
 
-    ![alt text](/home/afifridho/Pictures/Screenshot_2017-04-28_15-07-06.png?raw=true "Optional Title")
+    ![alt text](Screenshot_2017-04-28_15-07-06.png?raw=true "Optional Title")
 
 # Referensi:
 http://dhost.info/pasjagor/des/start.php?id=0
