@@ -5,7 +5,8 @@ import select
 HOST = '127.0.0.1' 
 SOCKET_LIST = []
 RECV_BUFFER = 4096 
-PORT = 9009
+PORT = 9008
+
 
 def chat_server():
 
@@ -18,13 +19,13 @@ def chat_server():
     SOCKET_LIST.append(server_socket)
  
     print "Chat server started on port " + str(PORT)
- 
+    flag = 0
     while 1:
 
         # get the list sockets which are ready to be read through select
         # 4th arg, time_out  = 0 : poll and never block
         ready_to_read,ready_to_write,in_error = select.select(SOCKET_LIST,[],[],0)
-      
+
         for sock in ready_to_read:
             # a new connection request recieved
             if sock == server_socket: 
@@ -36,26 +37,54 @@ def chat_server():
              
             # a message from a client, not a new connection
             else:
-                # process data recieved from client, 
+                # print flag
+                # if flag < 2:
+                #     # print 'masuk flag 0'
+                #     dataa = sock.recv(RECV_BUFFER)
+                #     print dataa
+                #     broadcast(server_socket, sock, dataa)
+                #     flag += 1
+                # else:
+                    # process data recieved from client, 
+                    # print 'masuk else'
                 try:
+                    # print 'masuk try'
                     # receiving data from the socket.
+                    print 'masuk try'
                     data = sock.recv(RECV_BUFFER)
+                    print '-----------'
                     print data
-                    msg = data.split('\n')[0]+'\n'
-                    sender = data.split('\n')[1]
-                    # print data
-                    # print msg
-                    if data:
-                        # there is something in the socket
-                        # broadcast(server_socket, sock, "\r" + '[' + str(sock.getpeername()) + '] ' + ': ' + msg)
-                        broadcast(server_socket, sock, "\r" + '[' + sender + ' ] ' + ': ' + msg)
-                    else:
-                        # remove the socket that's broken    
-                        if sock in SOCKET_LIST:
-                            SOCKET_LIST.remove(sock)
+                    if flag < 2:
+                        print 'flag<2'
+                        if data:
+                            broadcast(server_socket, sock, data)
+                        else:
+                            # remove the socket that's broken    
+                            if sock in SOCKET_LIST:
+                                SOCKET_LIST.remove(sock)
 
-                        # at this stage, no data means probably the connection has been broken
-                        broadcast(server_socket, sock, "Client (%s, %s) is offline\n" % addr) 
+                            # at this stage, no data means probably the connection has been broken
+                            broadcast(server_socket, sock, "Client (%s, %s) is offline\n" % addr)
+                        flag += 1
+                    else:
+                        print 'masuk else'
+                        msg = data.split('\n')[0]+'\n'
+                        sender = data.split('\n')[1]
+                        # sharedkey = data.split('\n')[2]
+                        # print sharedkey
+                        # print data
+                        # print msg
+                        if data:
+                            # there is something in the socket
+                            # broadcast(server_socket, sock, "\r" + '[' + str(sock.getpeername()) + '] ' + ': ' + msg)
+                            broadcast(server_socket, sock, "\r" + '[' + sender + ' ] ' + ': ' + msg + sharedkey)
+                        else:
+                            # remove the socket that's broken    
+                            if sock in SOCKET_LIST:
+                                SOCKET_LIST.remove(sock)
+
+                            # at this stage, no data means probably the connection has been broken
+                            broadcast(server_socket, sock, "Client (%s, %s) is offline\n" % addr) 
 
                 # exception 
                 except:

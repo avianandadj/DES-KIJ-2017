@@ -338,10 +338,10 @@ def encrypt_hexword(key, hexword, IV):
 
 
 def run():
-    if len(sys.argv) == 2:
-        # key = sys.argv[1].upper()
+    if len(sys.argv) == 3:
+        key = sys.argv[2].upper()
         # msg = sys.argv[2]
-        key = '133457799BBCDFF1'
+        # key = '133457799BBCDFF1'
         msg = sys.argv[1]
 
         print 'key:', key

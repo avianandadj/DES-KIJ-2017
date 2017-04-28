@@ -226,7 +226,7 @@ def encrypt(key, msg):
     for hexword in get_hexwords(msg):
         #print string_chunker('encrypting hexword', hexword, 2)
         (hasilteks, hasilbiner) = encrypt_hexword(key, hexword, IV)
-        # print 'ini hasil biner di fungsi encrypt: '+hasilbiner
+        # print 'ini hasil biner di fungsi encrypt: '+hadsilbiner
         # print 'ini hasil text di fungsi encrypt: '+hasilteks
         IV = hasilbiner
         encrypted_msg.append(hasilteks)
@@ -342,9 +342,9 @@ def encrypt_hexword(key, hexword, IV):
 
 
 def run():
-    if len(sys.argv) == 2:
-        # key = sys.argv[1].upper()
-        key = '133457799BBCDFF1'
+    if len(sys.argv) == 3:
+        key = sys.argv[2].upper()
+        # key = '133457799BBCDFF1'
         msg = sys.argv[1]
         # msg = 'COMPUTER'
         print 'key:', key

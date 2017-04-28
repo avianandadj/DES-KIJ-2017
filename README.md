@@ -49,6 +49,42 @@ Encrypted Chat
     1.2 Pesan di enkripsi secara end-to-end (dienkripsi pada client dan didekripsi pada client)
     1.3 Pada program chat ini kami menggunakan library subprocess pada python untuk menjalankan file des.py (enkripsi) dan file decrypt-des.py (dekripsi)
 
+Diffie-hellman
+
+        def run():
+            q=353 # publicly known must be prime
+            a=3 # publicly known
+
+            xa=97 # only client1 knows this 
+            xb=233 # only client2 knows this
+
+            client1Sends = (a**xa)%q
+            client2process = (client1Sends**xb)%q
+            client2Sends = (a**xb)%q
+            client1process = (client2Sends**xa)%q
+
+
+            print "client1 sends    ", client1Sends 
+            print "client2 process   ", client2process 
+            print "client2 sends      ", client2Sends 
+            print "client1 process ", client1process
+
+            print "In theory both should have ", (a**(xa*xb))%q
+
+            return client1Sends, client2Computes, client2Sends, client1Computes
+
+    Diffie-hellman adalah metode untuk mendistribusikan key dengan cara client pertama menentukan nilai random x, yang kemudian akan dimasukkan dalam perhitungan yang melihatkan nilai q (bilangan prima) dan a(primitive root)
+
+    rumusnya sharedkeynya adalah: 
+    pada client a yang dikirim ke client b: (a^xa) mod q
+    pada client b yang dikirim ke client a: (a^xb) mod q
+
+    lalu sharedkey tadi di proses ada masing-masing client 
+    pada client a: (((a^xb) mod q)^xa) mod q
+    pada client b: (((a^xa) mod q)^xb) mod q
+
+    setelah di proses, kedua client akan mendapatkan key yang sama untuk digunakan pada enkripsi DES.
+
 # Referensi:
 http://dhost.info/pasjagor/des/start.php?id=0
 http://octarapribadi.blogspot.co.id/2012/10/contoh-enkripsi-dengan-algoritma-des.html
