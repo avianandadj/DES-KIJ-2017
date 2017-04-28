@@ -85,6 +85,8 @@ Diffie-hellman
 
     setelah di proses, kedua client akan mendapatkan key yang sama untuk digunakan pada enkripsi DES.
 
+    ![Alt text](/home/afifridho/Pictures/to/Screenshot_2017-04-28_15-07-06.png?raw=true "Optional Title")
+
 # Referensi:
 http://dhost.info/pasjagor/des/start.php?id=0
 http://octarapribadi.blogspot.co.id/2012/10/contoh-enkripsi-dengan-algoritma-des.html

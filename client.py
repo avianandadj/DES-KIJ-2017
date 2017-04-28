@@ -24,7 +24,7 @@ while True:
 
 	# print ("-> ", counter)
 	if counter == 1:
-		s.sendall(jebret)
+		s.sendall(sharedkey)
 		ya = s.recv(10)
 		# print ('ini ya->', ya)
 		kab = (int(ya)**int_xb)%q

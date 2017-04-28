@@ -30,7 +30,7 @@ while True:
 		if counter == 2:
 			yb = c.recv(10)
 			# print('ini yb-> ',yb)
-			c.send(jebret)
+			c.send(sharedkey)
 			kab = (int(yb)**int_xa)%q
 			# print('ini kab-> ',kab)
 			key = str(kab)
