@@ -46,7 +46,7 @@ def generate_keypair(p, q):
     # d = extended_euclidean(e, phi)
     d = random.randrange(1,1000)
     while (d * e) % phi != 1:
-        d = random.range(1,1000)
+        d = random.randrange(1,1000)
   
     #didapatkan nilai private key (d,n) dan public key (e,n)
     return ((e, n), (d, n))
