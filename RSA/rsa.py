@@ -1,18 +1,13 @@
 import random
 
 
-'''
-Euclid's algorithm for determining the greatest common divisor
-Use iteration to make it faster for larger integers
-'''
+#fungsi gcd (greatest common divisor) 
 def gcd(a, b):
     while b != 0:
         a, b = b, a % b
     return a
 
-'''
-Euclid's extended algorithm for finding the multiplicative inverse of two numbers
-'''
+#fungsi 
 def extended_euclidean(e, phi):
     d = 0
     x1 = 0
@@ -37,9 +32,7 @@ def extended_euclidean(e, phi):
     if temp_phi == 1:
         return d + phi
 
-'''
-cek apakah angka yang dimasukka termasuk bilangan
-'''
+#cek apakah bilangan yang dimasukkan bilangan prima
 def is_prime(num):
     if num == 2:
         return True
@@ -50,32 +43,32 @@ def is_prime(num):
             return False
     return True
 
+#fungsi mendapatkan key
 def generate_keypair(p, q):
     if not (is_prime(p) and is_prime(q)):
         raise ValueError('Both numbers must be prime.')
     elif p == q:
         raise ValueError('p and q cannot be equal')
-    #n = pq
+    #nilai n didapat dari perkalian p dan q
     n = p * q
 
-    #Phi is the totient of n
+    #mencari nilai phi
     phi = (p-1) * (q-1)
     print phi
-    #Choose an integer e such that e and phi(n) are coprime
+    #tentukan nilai e untuk public key
     e = 7
     print e
 
-    #Use Euclid's Algorithm to verify that e and phi(n) are comprime
+    #mengecek apakah nilai gcd e dan phi adalah 1 
     g = gcd(e, phi)
     while g != 1:
         e = 7
         g = gcd(e, phi)
 
-    #Use Extended Euclid's Algorithm to generate the private key
+    #mengecek nilai private key (d) dengan algoritma extended euclidean
     d = extended_euclidean(e, phi)
     
-    #Return public and private keypair
-    #Public key is (e, n) and private key is (d, n)
+    #didapatkan nilai private key (d,n) dan public key (e,n)
     return ((e, n), (d, n))
 
 def encrypt(pk, plaintext):

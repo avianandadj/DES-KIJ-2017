@@ -22,7 +22,7 @@ counter = 0
 
 s = socket.socket()
 host = "10.151.43.5"
-port = 12241
+port = 12240
 
 s.connect((host, port))
 print 'Terhubung dengan server dengan IP : ', host
