@@ -88,6 +88,60 @@ Diffie-hellman
     
 ![screenshot_2017-04-28_15-07-06](https://cloud.githubusercontent.com/assets/19360671/25523274/49b5a28c-2c30-11e7-9a2d-c80eb935ee5f.png)
 
+    RSA
+        Dalam program ini RSA hanya digunakan untuk sharing private dan public key yang nantinya key tersebut akan digunakan untuk enkripsi dan dekripsi menggunakan algoritma DES.
+        Cara mendapatkan key menggunakan algoritma RSA adalah sebagai berikut:
+        Langkah 1 :
+        Pilih 2 bilangan prima secara acak untuk nilai p & q. Dengan syarat nilai p > q. 
+        Sebagai contoh kita akan ambil nilai p = 17  & q = 11
+
+        Langkah 2 :
+        Hitung N 
+        N = p*q
+          = 17 * 11 
+          = 187
+
+        Langkah 3 :
+        Hitung phi. 
+        φ = (p-1)*(q-1)
+          = (17-1) * (11-1)
+          = 16 * 10
+          = 160
+
+        Langkah 4 :
+        Pilih nilai e dengan syarat e > 1, dan GCD(e,160) = 1
+        sebagai contoh, nilai e yang akan kita ambil adalah 7.
+
+        Kita pastikan apakah GCD(7,160) = 1 ?
+        160 mod 7 = 6
+        7 mod 6 = 1        
+
+        Ternyata benar GCD(7,160) = 1. Berarti kita dapat menggunakan angka 7 sebagai nilai e.
+
+        Langkah 5 :
+        Pilih nilai d, dengan syarat (d.e) mod φ = 1
+        sebagai sample, nilai d yang akan kita ambil adalah 283.
+
+        Kita pastikan apakah (283*7) mod 160 = 1 ?
+        (283*7) mod 160 
+        1981 mod 160 = 61
+        160 mod 61 = 38
+        61 mod 38 = 23
+        38 mod 23 = 15
+        23 mod 15 = 8
+        8 mod 7 = 1
+        
+        Ternyata benar (283*7) mod 160 = 1. Berarti persyaratan terpenuhi dan 283 sudah bisa dipastikan dapat mengisi nilai d
+
+        Dengan demikian, kita dapat menyimpulkan bahwa :
+        Private key RSA nya adalah :
+        n = 187
+        d = 283
+
+        Public key RSA nya adalah :
+        n = 187
+        e = 7
+
 # Referensi:
 http://dhost.info/pasjagor/des/start.php?id=0
 http://octarapribadi.blogspot.co.id/2012/10/contoh-enkripsi-dengan-algoritma-des.html
