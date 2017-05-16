@@ -147,3 +147,5 @@ http://dhost.info/pasjagor/des/start.php?id=0
 http://octarapribadi.blogspot.co.id/2012/10/contoh-enkripsi-dengan-algoritma-des.html
 http://page.math.tu-berlin.de/~kant/teaching/hess/krypto-ws2006/des.htm
 http://github.com/studiawan
+https://gist.github.com/JonCooperWorks/5314103
+http://teknosian.blogspot.co.id/2014/06/5-langkah-mudah-membuat-kunci-algoritma.html
