@@ -7,30 +7,7 @@ def gcd(a, b):
         a, b = b, a % b
     return a
 
-#fungsi 
-def extended_euclidean(e, phi):
-    d = 0
-    x1 = 0
-    x2 = 1
-    y1 = 1
-    temp_phi = phi
-    
-    while e > 0:
-        temp1 = temp_phi/e
-        temp2 = temp_phi - temp1 * e
-        temp_phi = e
-        e = temp2
-        
-        x = x2- temp1* x1
-        y = d - temp1 * y1
-        
-        x2 = x1
-        x1 = x
-        d = y1
-        y1 = y
-    
-    if temp_phi == 1:
-        return d + phi
+
 
 #cek apakah bilangan yang dimasukkan bilangan prima
 def is_prime(num):
@@ -66,8 +43,11 @@ def generate_keypair(p, q):
         g = gcd(e, phi)
 
     #mengecek nilai private key (d) dengan algoritma extended euclidean
-    d = extended_euclidean(e, phi)
-    
+    # d = extended_euclidean(e, phi)
+    d = random.randrange(1,1000)
+    while (d * e) % phi != 1:
+        d = random.range(1,1000)
+  
     #didapatkan nilai private key (d,n) dan public key (e,n)
     return ((e, n), (d, n))
 
