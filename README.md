@@ -92,7 +92,7 @@ Diffie-hellman
         Dalam program ini RSA hanya digunakan untuk sharing private dan public key yang nantinya key tersebut akan digunakan untuk enkripsi dan dekripsi menggunakan algoritma DES.
         Cara mendapatkan key menggunakan algoritma RSA adalah sebagai berikut:
         Langkah 1 :
-        Pilih 2 bilangan prima secara acak untuk nilai p & q. Dengan syarat nilai p > q. 
+        Pilih 2 bilangan prima secara acak untuk nilai p & q. 
         Sebagai contoh kita akan ambil nilai p = 17  & q = 11
 
         Langkah 2 :
@@ -120,7 +120,7 @@ Diffie-hellman
 
         Langkah 5 :
         Pilih nilai d, dengan syarat (d.e) mod φ = 1
-        sebagai sample, nilai d yang akan kita ambil adalah 283.
+        sebagai contoh, nilai d yang akan kita ambil adalah 283.
 
         Kita pastikan apakah (283*7) mod 160 = 1 ?
         (283*7) mod 160 
@@ -133,7 +133,6 @@ Diffie-hellman
         
         Ternyata benar (283*7) mod 160 = 1. Berarti persyaratan terpenuhi dan 283 sudah bisa dipastikan dapat mengisi nilai d
 
-        Dengan demikian, kita dapat menyimpulkan bahwa :
         Private key RSA nya adalah :
         n = 187
         d = 283
