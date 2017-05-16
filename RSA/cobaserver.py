@@ -2,11 +2,19 @@ import socket
 import subprocess
 from rsa import *
 import pickle
+import random
 
 a = 3
 
-prime1 = 23
-prime2 = 19
+prime1 = random.randrange(11,20)
+while is_prime(prime1) == False:
+	prime1 = random.randrange(11,20)
+print "ini prime1: "+str(prime1)
+prime2 = random.randrange(21,30)
+while is_prime(prime2) == False:
+	prime2 = random.randrange(21,30)
+print "ini prime2: "+str(prime2)
+
 public, private = generate_keypair(prime1, prime2)
 xa, q = private
 print "this is private key"+str(private)
@@ -19,8 +27,8 @@ paketserver2 = pickle.dumps(paketserver)
 counter = 0
 
 s = socket.socket()
-host = socket.gethostname()
-port = 12240
+host = '127.0.0.1'
+port = 12241
 s.bind((host, port))
 s.listen(5)
 c = None

@@ -42,8 +42,7 @@ def generate_keypair(p, q):
         e = 7
         g = gcd(e, phi)
 
-    #mengecek nilai private key (d) dengan algoritma extended euclidean
-    # d = extended_euclidean(e, phi)
+    #mengecek nilai private key (d) apakah hasilnya 1 apabila dioperasikan dengan rumus dibawah
     d = random.randrange(1,1000)
     while (d * e) % phi != 1:
         d = random.randrange(1,1000)
